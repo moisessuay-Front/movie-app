@@ -1,6 +1,15 @@
 <template>
     <h1 class="text-center my-5 fw-bold display-5">Películas</h1>
 
+    <PeliculaForm 
+        :pelicula="peliculaSeleccionada"
+        :actores="actores"
+        :generos="generos"
+        @guardar="guardarPelicula"
+    />
+
+
+
     <div class="row">
         <div class="col-md-3 mb-5" v-for="pelicula in peliculas" :key="pelicula.id">
             <PeliculaCard 
@@ -23,6 +32,7 @@
     import { getActores } from '@/services/actorService';
     import { getGeneros } from '@/services/generoService';
     import PeliculaCard from '@/components/PeliculaCard.vue';
+import PeliculaForm from '@/components/PeliculaForm.vue';
 
     const peliculas = ref([])
     const actores = ref([])

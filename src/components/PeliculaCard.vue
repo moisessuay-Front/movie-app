@@ -14,7 +14,7 @@
             </p>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-info btn-sm me-2">Detalles</button>
+            <router-link :to="`/peliculas/${pelicula.id}`" class="btn btn-info btn-sm me-2">Detalles</router-link>
             <button class="btn btn-primary btn-sm me-2">Editar</button>
             <button class="btn btn-danger btn-sm">Eliminar</button>
         </div>
@@ -22,6 +22,8 @@
 </template>
 
 <script setup>
+import router from '@/router';
+
     const props = defineProps({
         pelicula: Object
     })
