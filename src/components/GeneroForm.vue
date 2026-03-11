@@ -12,16 +12,16 @@
     import { ref, watch } from 'vue'
 
     const props = defineProps({
-        actor: Object
+        genero: Object
     })
 
     const emit = defineEmits(['guardar'])
 
     const nombre = ref('')
 
-    watch(() => props.actor, (newActor) => {
-        if(newActor) {
-            nombre.value = newActor.nombre
+    watch(() => props.genero, (newGenero) => {
+        if(newGenero) {
+            nombre.value = newGenero.nombre
         }
     })
 
@@ -35,4 +35,5 @@
     }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
