@@ -14,7 +14,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Actores</label>
-            <select class="form-control" multiple v-model="actoresSeleccionados">
+            <select class="form-control" multiple size="10" v-model="actoresSeleccionados">
                 <option v-for="actor in actores" :key="actor.id" :value="actor.id">
                     {{ actor.nombre }}
                 </option>
@@ -22,7 +22,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Generos</label>
-            <select class="form-control" multiple v-model="generosSeleccionados">
+            <select class="form-control" multiple size="10" v-model="generosSeleccionados">
                 <option v-for="genero in generos" :key="genero.id" :value="genero.id">
                     {{ genero.nombre }}
                 </option>
