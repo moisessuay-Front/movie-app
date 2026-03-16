@@ -1,16 +1,16 @@
 <template>
-    <form class="mb-5" @submit.prevent = "submitForm">
+    <form @submit.prevent="submitForm" class="mb-5">
         <div class="mb-3">
             <label class="form-label">Nombre</label>
             <input type="text" class="form-control" v-model="nombre" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Año</label>
-            <input type="text" class="form-control" v-model="year" required>
+            <input type="number" class="form-control" v-model.number="year" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Poster</label>
-            <input type="number" class="form-control" v-model.number="poster" required>
+            <input type="text" class="form-control" v-model="poster" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Actores</label>
@@ -28,9 +28,10 @@
                 </option>
             </select>
         </div>
+        <button class="btn btn-primary">Guardar</button>
     </form>
-    
 </template>
+
 
 <script setup>
     import {ref, watch} from 'vue'

@@ -1,4 +1,3 @@
-import { logout } from "@/services/authService";
 import { createStore } from "vuex";
 
 export default createStore ({

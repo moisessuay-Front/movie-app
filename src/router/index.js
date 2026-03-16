@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import store from '@/store'
+import store from '../store'
 
 import ActorsView from '@/views/ActorsView.vue'
 import GenerosView from '@/views/GenerosView.vue'
@@ -21,16 +21,18 @@ const router = createRouter({
       component: PeliculasView
     },
     {
-      path: '/peliculas/:id',
+      path :'/peliculas/:id',
       component: DetallePelicula
     },
     {
-      path: '/actores',
-      component: ActorsView
+      path: '/actors',
+      component: ActorsView,
+      meta: { requiresAuth: true, requiresAdmin: true }
     },
     {
       path: '/generos',
-      component: GenerosView 
+      component: GenerosView,
+      meta: { requiresAuth: true, requiresAdmin: true } 
     },
     {
       path: '/login',
@@ -41,6 +43,19 @@ const router = createRouter({
       component: RegisterView
     }
   ],
+})
+
+router.beforeEach((to) => {
+  const user = store.state.user
+  const rol = store.state.rol
+
+  if (to.meta.requiresAuth && !user) {
+    return '/login'
+  }
+
+  if (to.meta.requiresAdmin && rol !== 'admin') {
+    return '/peliculas'
+  }
 })
 
 export default router

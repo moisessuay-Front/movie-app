@@ -15,13 +15,22 @@
         </div>
         <div class="card-footer text-center">
             <router-link :to="`/peliculas/${pelicula.id}`" class="btn btn-info btn-sm me-2">Detalles</router-link>
-            <button @click="emit('edit', pelicula)" class="btn btn-primary btn-sm me-2">Editar</button>
-            <button @click="emit('delete', pelicula.id)" class="btn btn-danger btn-sm">Eliminar</button>
+            <button v-if="isAdmin" @click="emit('edit', pelicula)" class="btn btn-primary btn-sm me-2">Editar</button>
+            <button v-if="isAdmin" @click="emit('delete', pelicula.id)" class="btn btn-danger btn-sm">Eliminar</button>
         </div>
     </div>
 </template>
 
 <script setup>
+    import { computed } from 'vue'
+    import { useStore } from 'vuex'
+
+
+    const store = useStore()
+    //filtros en base a si hay un usario logeado o si es admin o no.
+    const isLogged = computed(() => !!store.state.user) //!! transformando el valor en Booliano
+    const isAdmin = computed(() => store.state.rol === 'admin')
+
 
     const props = defineProps({
         pelicula: Object

@@ -2,27 +2,27 @@
     <h1 class="text-center my-5 fw-bold display-5">Películas</h1>
 
     <PeliculaForm 
+        v-if="isAdmin"
         :pelicula="peliculaSeleccionada"
         :actores="actores"
         :generos="generos"
         @guardar="guardarPelicula"
     />
 
-
-
     <div class="row">
         <div class="col-md-3 mb-5" v-for="pelicula in peliculas" :key="pelicula.id">
             <PeliculaCard 
-                :pelicula = "pelicula"
+                :pelicula="pelicula"
                 @edit = "editPelicula"
-                @delete = "removePelicula"
+                @delete= "removePelicula"
             />
         </div>
     </div>
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted, computed } from 'vue'
+    import { useStore } from 'vuex'
 
     import {
         getPeliculas,
@@ -31,14 +31,19 @@
         deletePelicula
     } from '@/services/peliculaService'
 
-    import { getActores } from '@/services/actorService'
-    import { getGeneros } from '@/services/generoService'
-    import PeliculaCard from '@/components/peliculaCard.vue'
-    import PeliculaForm from '@/components/peliculaForm.vue'
+    import { getActores } from '@/services/actorService';
+    import { getGeneros } from '@/services/generoService';
+    import PeliculaCard from '@/components/PeliculaCard.vue';
+    import PeliculaForm from '@/components/PeliculaForm.vue';
 
     const peliculas = ref([])
     const actores = ref([])
     const generos = ref([])
+
+    const store = useStore()
+    //filtros en base a si hay un usario logeado o si es admin o no.
+    const isLogged = computed(() => !!store.state.user) //!! transformando el valor en Booliano
+    const isAdmin = computed(() => store.state.rol === 'admin')
 
     const peliculaSeleccionada = ref(null)
     const isEditing = ref(false)
@@ -53,14 +58,14 @@
     onMounted(loadData)
 
     const guardarPelicula = async (pelicula) => {
-        if(isEditing.value) {
+        if (isEditing.value) {
             await updatePelicula(peliculaSeleccionada.value.id, pelicula)
         } else {
             await createPelicula(pelicula)
         }
 
         peliculaSeleccionada.value = null
-        isEditing.value =  false
+        isEditing.value = false
 
         await loadData()
     }
@@ -70,14 +75,11 @@
         isEditing.value = true
     }
 
-    const removePelicula = async (id) => {        
-        if (!confirm('Seguro/a que quieres eliminar esta Película?')) return
+    const removePelicula = async (id) => {
+        if (!confirm('Seguro/a quieres eliminar esta película?')) return
         await deletePelicula(id)
         await loadData()
     }
-
-
-
 
 </script>
 

@@ -6,7 +6,6 @@ import { VueFireFirestoreOptionsAPI } from 'vuefire'
 import { auth, firebaseApp } from './firebase/firebase'
 import store from './store'
 import { onAuthStateChanged } from 'firebase/auth'
-// import { auth } from './firebase/firebase'
 import { getUserProfile } from './services/authService'
 
 
@@ -22,7 +21,6 @@ import './assets/css/main.css'
 const app = createApp(App)
 
 app.use(router)
-
 app.use(store)
 
 app.use (VueFire, {
