@@ -25,7 +25,7 @@ const router = createRouter({
       component: DetallePelicula
     },
     {
-      path: '/actors',
+      path: '/actores',
       component: ActorsView,
       meta: { requiresAuth: true, requiresAdmin: true }
     },

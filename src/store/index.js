@@ -4,7 +4,7 @@ export default createStore ({
     state: {
         user: null,
         rol: null,
-        useProfile: null
+        userProfile: null
     },
     
     mutations: {
@@ -13,16 +13,16 @@ export default createStore ({
         },
 
         setRol(state, rol){
-            state.rol
+            state.rol = rol
         },
 
-        setUserProfile (state, profile){
-            state.profile
+        setUserProfile(state, profile){
+            state.userProfile = profile
         },
-        logout (state) {
+        logout(state) {
             state.user = null
             state.rol = null
-            state.profile = null 
+            state.userProfile = null 
         }
         }
     

@@ -39,10 +39,11 @@
     const user = computed(()=>store.state.user)
     const isAdmin = computed(()=> store.state.rol === 'admin')
 
+    console.log(isAdmin)
     const nombre = computed(()=> {
         return store.state.userProfile?.nombre || ''
     })
-
+console.log(nombre)
     const cerrarSesion = async ()=>{
         await logout()
         store.commit('logout')

@@ -34,7 +34,7 @@ app.use (VueFire, {
 onAuthStateChanged(auth, async (user) => {
     if (user){
         store.commit('setUser', user)
-        const profile = getUserProfile(user.uid)
+        const profile = await getUserProfile(user.uid)
 
         if (profile){
             store.commit('setUserProfile', profile)
